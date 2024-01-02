@@ -1,0 +1,1 @@
+export type validationResult = { isValid: true} | {isValid: false, validationMessages: string[]}
