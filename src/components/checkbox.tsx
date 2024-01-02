@@ -1,7 +1,7 @@
-import { techInterest } from "../types/attendee";
+import { TechInterest } from "../types/attendee";
 
 interface CheckboxProps {
-  techInterest: techInterest;
+  techInterest: TechInterest;
   onChange: (id: number) => void;
   index: number;
 }

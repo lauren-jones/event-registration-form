@@ -4,8 +4,8 @@ import "@fontsource/poppins";
 import { Input } from "./components/input";
 import { Checkbox } from "./components/checkbox";
 import { useState } from "react";
-import { attendee } from "./types/attendee";
-import { validationResult } from "./types/validationResult";
+import { Attendee } from "./types/attendee";
+import { ValidationResult } from "./types/validationResult";
 import {
   validateEmail,
   validateName,
@@ -15,7 +15,7 @@ import {
 function App() {
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const [attendee, setAttendee] = useState<attendee>({
+  const [attendee, setAttendee] = useState<Attendee>({
     name: "",
     email: "",
     phone: "",
@@ -44,16 +44,16 @@ function App() {
   });
 
   const [nameValidationResult, setNameValidationResult] =
-    useState<validationResult>(validateName(attendee.name));
+    useState<ValidationResult>(validateName(attendee.name));
 
   const [emailValidationResult, setEmailValidationResult] =
-    useState<validationResult>(validateEmail(attendee.email));
+    useState<ValidationResult>(validateEmail(attendee.email));
 
   const [phoneValidationResult, setPhoneValidationResult] =
-    useState<validationResult>(validatePhone(attendee.phone));
+    useState<ValidationResult>(validatePhone(attendee.phone));
 
   const updateTechInterests = (id: number) => {
-    let nextTechInterests = attendee.techInterests.map(
+    const nextTechInterests = attendee.techInterests.map(
       (techInterest, index) => {
         if (index === id) {
           return {
@@ -73,8 +73,21 @@ function App() {
         isRegistered ? "bg-bgPrimary" : "bg-bgSecondary md:bg-accent"
       }`}
     >
-      {!isRegistered && (
-        <div className="w-full max-w-[812px] flex flex-col gap-[16px] pt-[60px] md:py-[40px] md:flex-row md:gap-0">
+      {isRegistered ? (
+        <div className="flex flex-col gap-[16px] justify-center items-center">
+          <img
+            src={firework}
+            className="w-[200px] md:w-[350px] h-auto animate-pulse"
+          />
+          <p className="text-textPrimary text-lg font-medium md:text-2xl">
+            See you there
+          </p>
+          <p className="text-3xl font-semibold md:text-5xl text-textPrimary">
+            You're signed up!
+          </p>
+        </div>
+      ) : (
+        <div className="w-full max-w-[812px] flex flex-col gap-[16px] pt-[60px] md:py-[40px] md:flex-row md:gap-0 drop-shadow-xl">
           <div className="flex flex-col justify-center items-center w-[325px] gap-[6px] w-full md:bg-bgSecondary md:rounded-l-3xl">
             <p className="text-base font-normal text-center md:text-xl">
               Join us for the
@@ -82,9 +95,7 @@ function App() {
             <h2 className="text-4xl font-semibold text-center md:text-5xl">
               CodeBelle Hackathon
             </h2>
-            <div>
-              <img src={coder} className="" />
-            </div>
+            <img src={coder} />
           </div>
           <div className="bg-bgPrimary flex flex-col gap-[30px] px-[30px] py-[50px] w-full rounded-t-3xl md:rounded-l-none md:rounded-r-3xl">
             <Input
@@ -154,17 +165,6 @@ function App() {
               Register
             </button>
           </div>
-        </div>
-      )}
-      {isRegistered && (
-        <div className="flex flex-col gap-[16px] justify-center items-center">
-          <img src={firework} className="w-[200px] md:w-[350px] h-auto" />
-          <p className="text-textPrimary text-lg font-medium md:text-2xl">
-            See you there
-          </p>
-          <p className="text-3xl font-semibold md:text-5xl text-textPrimary">
-            You're signed up!
-          </p>
         </div>
       )}
     </div>

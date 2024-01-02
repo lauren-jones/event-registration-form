@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { validationResult } from "../types/validationResult";
+import { ValidationResult } from "../types/validationResult";
 
 interface InputProps {
   label: string;
   value: string;
   onChange: (valule: string) => void;
   placeholder?: string;
-  validationResult: validationResult;
+  validationResult: ValidationResult;
   setValidationResult: (value: string) => void;
 }
 

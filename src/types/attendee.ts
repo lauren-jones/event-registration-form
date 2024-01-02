@@ -1,11 +1,11 @@
-export type attendee = {
+export type Attendee = {
     name: string;
     email: string;
     phone: string;
-    techInterests: techInterest[];
+    techInterests: TechInterest[];
 }
 
-export type techInterest = {
+export type TechInterest = {
     tech: string;
     checked: boolean;
 }
